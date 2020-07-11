@@ -9,13 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
-    private PageViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNav = (BottomNavigationView)findViewById(R.id.container_bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(bottomNavMethod);
-
-        viewModel = new ViewModelProvider(this).get(PageViewModel.class);
-
         displayAttributes();
 
     }

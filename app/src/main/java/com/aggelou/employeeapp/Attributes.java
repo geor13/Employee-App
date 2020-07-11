@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class Attributes extends Fragment {
 
-//    private PageViewModel viewModel;
     private RecyclerView attributesList;
     private Button addNewAttributeButton;
 
@@ -31,7 +30,6 @@ public class Attributes extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        viewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
     }
 
     @Override
@@ -59,13 +57,7 @@ public class Attributes extends Fragment {
         });
 
         //LISTEN FOR CHANGES IN ATTRIBUTES LIST
-//        viewModel.getAttributes().observe(this, new Observer<List<AttributesModel>>() {
-//            @Override
-//            public void onChanged(List<AttributesModel> attributesModels) {
-//
-//                //UPDATE RECYCLER VIEW HERE
-//            }
-//        });
+
     }
 
 }

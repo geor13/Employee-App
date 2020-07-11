@@ -25,6 +25,10 @@ public class PageViewModel extends AndroidViewModel {
         employeesList = repository.getEmployeesList();
     }
 
+    public void deleteAttributeFromJoint(int attributeID){
+        repository.deleteAttributesFromUsers(attributeID);
+    }
+
     public void insertEmployee (EmployeesModel employee){
         repository.insertEmployee(employee);
     }
@@ -47,5 +51,9 @@ public class PageViewModel extends AndroidViewModel {
 
     public LiveData<List<EmployeesModel>> getEmployeesList(){
         return employeesList;
+    }
+
+    public LiveData<List<AttributesModel>> getEmployeeAttributes(int employeeID){
+        return repository.getEmployeeAttributes(employeeID);
     }
 }

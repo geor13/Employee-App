@@ -7,7 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {AttributesModel.class, EmployeesModel.class}, exportSchema = false, version = 1)
+@Database(entities = {AttributesModel.class, EmployeesModel.class, EmployeesJoinAttributes.class}, exportSchema = false, version = 1)
 public abstract class ApplicationDatabase extends RoomDatabase {
     private static  ApplicationDatabase instance;
 
@@ -23,6 +23,6 @@ public abstract class ApplicationDatabase extends RoomDatabase {
     }
 
     public abstract AttributesModelDao getAttributesDao();
-
+    public abstract EmployeesJoinAttributesDao getEmployeesJoinAttributesDao();
     public abstract EmployeesModelDao getEmployeesDao();
 }
