@@ -14,7 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/attributes_list"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        tools:listitem="@layout/single_attribute_list"/>
 
 
     <Button

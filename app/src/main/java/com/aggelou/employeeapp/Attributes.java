@@ -10,10 +10,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Attributes extends Fragment {
-
     private RecyclerView attributesList;
     private Button addNewAttributeButton;
 
@@ -27,16 +27,15 @@ public class Attributes extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_attributes, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -47,6 +46,12 @@ public class Attributes extends Fragment {
             attributesList = getView().findViewById(R.id.attributes_list); //GET A REFERENCE TO THE RECYCLER VIEW
             addNewAttributeButton = getView().findViewById(R.id.add_attribute);
         }
+
+
+        attributesList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        AttributesAdapter adapter = new AttributesAdapter();
+        attributesList.setAdapter(adapter);
+
 
         addNewAttributeButton.setOnClickListener(new View.OnClickListener() {
             @Override
