@@ -1,5 +1,6 @@
 package database;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -18,6 +19,7 @@ public class EmployeesModel {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "employeeID")
+    @NonNull
     private int employeeID;
 
     @ColumnInfo(name = "employeeName")
@@ -32,7 +34,11 @@ public class EmployeesModel {
     @ColumnInfo(name = "homeAddress")
     private String homeAddress;
 
-    public long getEmployeeID() {
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public int getEmployeeID() {
         return employeeID;
     }
 

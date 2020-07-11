@@ -1,5 +1,6 @@
 package database;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -13,13 +14,17 @@ public class AttributesModel {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "attrID")
+    @NonNull
     private int attrID;
 
     @ColumnInfo(name = "attrName")
     private String attrName;
 
+    public void setAttrID(int attrID) {
+        this.attrID = attrID;
+    }
 
-    public long getAttrID() {
+    public int getAttrID() {
         return attrID;
     }
 

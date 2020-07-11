@@ -17,7 +17,7 @@ public class PageViewModel extends AndroidViewModel {
     private LiveData<List<AttributesModel>> attributesList;
     private LiveData<List<EmployeesModel>> employeesList;
 
-    private PageViewModel(@NonNull Application application) {
+    public PageViewModel(@NonNull Application application) {
         super(application);
 
         repository = new Repository(application);
