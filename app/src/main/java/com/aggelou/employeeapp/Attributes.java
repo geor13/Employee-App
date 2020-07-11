@@ -10,12 +10,19 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import database.AttributesModel;
 
 public class Attributes extends Fragment {
     private RecyclerView attributesList;
     private Button addNewAttributeButton;
+    private PageViewModel fragViewModel;
 
     public static Attributes getAttrInstance(){
         return new Attributes();
@@ -52,6 +59,7 @@ public class Attributes extends Fragment {
         AttributesAdapter adapter = new AttributesAdapter();
         attributesList.setAdapter(adapter);
 
+        fragViewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
 
         addNewAttributeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +70,12 @@ public class Attributes extends Fragment {
         });
 
         //LISTEN FOR CHANGES IN ATTRIBUTES LIST
+        fragViewModel.getAttributes().observe(getViewLifecycleOwner(), new Observer<List<AttributesModel>>() {
+            @Override
+            public void onChanged(List<AttributesModel> attributesModels) {
 
+            }
+        });
     }
 
 }

@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
-    private PageViewModel mViewModel;
+    private PageViewModel actViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = (BottomNavigationView)findViewById(R.id.container_bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(bottomNavMethod);
         displayAttributes();
-        mViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+        actViewModel = new ViewModelProvider(this).get(PageViewModel.class);
 
     }
 
