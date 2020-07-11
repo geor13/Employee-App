@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 @Database(entities = {AttributesModel.class, EmployeesModel.class, EmployeesJoinAttributes.class}, exportSchema = false, version = 1)
+@TypeConverters({DatesConverter.class})
 public abstract class ApplicationDatabase extends RoomDatabase {
     private static  ApplicationDatabase instance;
 
