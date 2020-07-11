@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_attributes"
+        android:title="@string/attribute_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_attributes_icon"/>
+
+    <item
+        android:id="@+id/tab_employees"
+        android:title="@string/employees_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_employees_icon"/>
+
+    <item
+        android:id="@+id/tab_maps"
+        android:title="@string/maps_tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_maps_icon"/>
+
+</menu>

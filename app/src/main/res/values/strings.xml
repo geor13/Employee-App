@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Employee App</string>
+    <string name="attribute_tab">Attributes</string>
+    <string name="employees_tab">Employees</string>
+    <string name="maps_tab">Maps</string>
+    <string name="add_attribute_txt">ADD</string>
+    <string name="attribute_name">Attribute name</string>
+    <string name="new_attribute_hint">Enter attribute name</string>
+    <string name="cancel_btn">CANCEL</string>
+    <string name="create_btn">CREATE</string>
+
+</resources>
