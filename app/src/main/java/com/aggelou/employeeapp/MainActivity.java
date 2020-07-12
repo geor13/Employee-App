@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav = (BottomNavigationView)findViewById(R.id.container_bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(bottomNavMethod);
         displayAttributes();
+
         actViewModel = new ViewModelProvider(this).get(PageViewModel.class);
 
     }

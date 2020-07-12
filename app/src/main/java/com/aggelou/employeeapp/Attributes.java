@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,10 @@ public class Attributes extends Fragment {
     private RecyclerView attributesList;
     private Button addNewAttributeButton;
     private PageViewModel fragViewModel;
+
+    private static final int ADD_NOTE_REQUEST_CODE = 1;
+    public static final int FRAGMENT_RESULT_CODE_SUCCESS = 12;
+    public static final int FRAGMENT_RESULT_CODE_CANCEL = 13;
 
     public static Attributes getAttrInstance(){
         return new Attributes();
@@ -56,7 +61,7 @@ public class Attributes extends Fragment {
 
 
         attributesList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        AttributesAdapter adapter = new AttributesAdapter();
+        final AttributesAdapter adapter = new AttributesAdapter();
         attributesList.setAdapter(adapter);
 
         fragViewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
@@ -65,7 +70,7 @@ public class Attributes extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddAttributeActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_NOTE_REQUEST_CODE);
             }
         });
 
@@ -73,9 +78,20 @@ public class Attributes extends Fragment {
         fragViewModel.getAttributes().observe(getViewLifecycleOwner(), new Observer<List<AttributesModel>>() {
             @Override
             public void onChanged(List<AttributesModel> attributesModels) {
-
+                adapter.changeAttributes(attributesModels);
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ADD_NOTE_REQUEST_CODE && resultCode == FRAGMENT_RESULT_CODE_SUCCESS){
+            String title = data.getStringExtra(AddAttributeActivity.EXTRA_TITLE);
+            AttributesModel attribute = new AttributesModel(title);
+            fragViewModel.insertAttribute(attribute);
+            Toast.makeText(getActivity(), "Attribute saved", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
