@@ -1,9 +1,7 @@
 package com.aggelou.employeeapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,32 +81,19 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
 
     @Override
     public void editClicked(AttributesModel attribute) {
-        Intent intent = new Intent(this, EditAttribute.class);
-        intent.putExtra(THE_MODEL, attribute);
-        startActivityForResult(intent, EDIT_ATTRIBUTE_REQUEST);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //BEGIN AN EDIT ATTRIBUTE FRAGMENT AND SEND IT THE attribute
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(THE_MODEL, attribute);
 
-        if (requestCode == EDIT_ATTRIBUTE_REQUEST && resultCode == RESULT_OK && data != null){
-
-            AttributesModel newAttribute = (AttributesModel)data.getSerializableExtra(EditAttribute.NEW_ATTRIBUTE);
-            boolean isDeleted = data.getBooleanExtra(EditAttribute.IS_DELETED, false);
-
-            if(!isDeleted){
-
-                actViewModel.insertAttribute(newAttribute);
-
-            } else {
-                actViewModel.deleteAttribute(newAttribute);
-            }
-        } else {
-            Toast.makeText(this, "Editing cancelled", Toast.LENGTH_SHORT).show();
-        }
+        EditAttributeFragment editAttribute = EditAttributeFragment.newInstance();
+        editAttribute.setArguments(bundle);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragments_container, editAttribute).addToBackStack(null).commit();
 
     }
+
 
     @Override
     public void deleteClickedEmployee(EmployeesModel employee) {

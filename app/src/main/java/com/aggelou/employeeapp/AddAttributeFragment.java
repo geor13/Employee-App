@@ -73,5 +73,18 @@ public class AddAttributeFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        cancelNewAttr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Fragment back = new Attributes();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragments_container, back);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
     }
 }
