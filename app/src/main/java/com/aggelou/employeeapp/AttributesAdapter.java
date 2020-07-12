@@ -1,5 +1,6 @@
 package com.aggelou.employeeapp;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,21 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
 
     private List<AttributesModel> attributes = new ArrayList<>();
 
+    interface AdapterListener{
+        void deleteClicked(AttributesModel attribute);
+        void editClicked(AttributesModel attribute);
+    }
+
+    private AdapterListener listener;
+
+    //SOS
+    private Context context;
+
+    public AttributesAdapter(Context context){
+        this.context = context;
+        this.listener = (AdapterListener)context;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,8 +43,28 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.attributeName.setText(attributes.get(position).getAttrName());
+
+        //TRY TO ADD DELETE FUNCTIONALITY
+        holder.deleteAttributeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //BETTER IMPLEMENT A LISTENER
+                if(listener != null){
+                    listener.deleteClicked(attributes.get(position));
+                }
+            }
+        });
+
+        holder.attributeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null){
+                    listener.editClicked(attributes.get(position));
+                }
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditAttribute">
+
+    <TextView
+        android:id="@+id/chosen_attribute_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#707070"
+        android:lineSpacingExtra="5sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/attribute_name"/>
+
+    <EditText
+        android:id="@+id/change_attribute_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/new_attribute_hint"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#707070"
+        android:lineSpacingExtra="5sp"
+        app:layout_constraintTop_toBottomOf="@id/chosen_attribute_title"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toStartOf="@id/chosen_attribute_title"/>
+
+    <TextView
+        android:id="@+id/delete_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_heading"
+        app:layout_constraintStart_toStartOf="@id/change_attribute_name"
+        app:layout_constraintTop_toBottomOf="@id/change_attribute_name"
+        android:layout_marginTop="47dp"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#707070"
+        android:lineSpacingExtra="5sp"/>
+
+    <CheckBox
+        android:id="@+id/no_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/change_attribute_name"
+        app:layout_constraintTop_toBottomOf="@id/delete_header"
+        android:text="@string/no_delete_checkbox"/>
+    <CheckBox
+        android:id="@+id/yes_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/no_delete"
+        app:layout_constraintStart_toEndOf="@id/no_delete"
+        android:layout_marginStart="10dp"
+        android:text="@string/delete_checkbox"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel_edit"
+        app:layout_constraintStart_toStartOf="@id/no_delete"
+        android:text="@string/cancel_btn"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#707070"
+        android:lineSpacingExtra="5sp"
+        app:layout_constraintTop_toBottomOf="@id/no_delete"
+        android:layout_marginTop="49dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_edit"
+        app:layout_constraintStart_toEndOf="@id/cancel_edit"
+        app:layout_constraintTop_toTopOf="@id/cancel_edit"
+        android:text="@string/save_edit"
+        android:layout_marginStart="10dp"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="normal"
+        android:textColor="#1e3d65"
+        android:lineSpacingExtra="5sp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

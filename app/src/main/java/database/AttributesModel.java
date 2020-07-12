@@ -5,8 +5,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "Attributes")
-public class AttributesModel {
+public class AttributesModel implements Serializable {
 
     public AttributesModel(String attrName){
         this.attrName = attrName;
@@ -32,4 +34,7 @@ public class AttributesModel {
         return attrName;
     }
 
- }
+    public void setAttrName(String attrName) {
+        this.attrName = attrName;
+    }
+}

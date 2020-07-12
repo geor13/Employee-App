@@ -61,7 +61,7 @@ public class Attributes extends Fragment {
 
 
         attributesList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        final AttributesAdapter adapter = new AttributesAdapter();
+        final AttributesAdapter adapter = new AttributesAdapter(getActivity());
         attributesList.setAdapter(adapter);
 
         fragViewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
@@ -92,6 +92,9 @@ public class Attributes extends Fragment {
             AttributesModel attribute = new AttributesModel(title);
             fragViewModel.insertAttribute(attribute);
             Toast.makeText(getActivity(), "Attribute saved", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "Canceled adding attribute", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

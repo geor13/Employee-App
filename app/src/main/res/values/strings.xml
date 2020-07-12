@@ -8,5 +8,9 @@
     <string name="new_attribute_hint">Enter attribute name</string>
     <string name="cancel_btn">CANCEL</string>
     <string name="create_btn">CREATE</string>
+    <string name="delete_checkbox">YES</string>
+    <string name="no_delete_checkbox">NO</string>
+    <string name="delete_heading">Delete Attribute</string>
+    <string name="save_edit">DONE</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.aggelou.employeeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +15,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import database.AttributesModel;
+
+public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener {
     private BottomNavigationView bottomNav;
     private PageViewModel actViewModel;
+
+    public static final String THE_MODEL = "com.aggelou.employeeapp.THE_MODEL";
+    public static final int EDIT_ATTRIBUTE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,4 +74,38 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+
+    @Override
+    public void deleteClicked(AttributesModel attribute) {
+        actViewModel.deleteAttribute(attribute);
+    }
+
+    @Override
+    public void editClicked(AttributesModel attribute) {
+        Intent intent = new Intent(this, EditAttribute.class);
+        intent.putExtra(THE_MODEL, attribute);
+        startActivityForResult(intent, EDIT_ATTRIBUTE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDIT_ATTRIBUTE_REQUEST && resultCode == RESULT_OK && data != null){
+
+            AttributesModel newAttribute = (AttributesModel)data.getSerializableExtra(EditAttribute.NEW_ATTRIBUTE);
+            boolean isDeleted = data.getBooleanExtra(EditAttribute.IS_DELETED, false);
+
+            if(!isDeleted){
+
+                actViewModel.insertAttribute(newAttribute);
+
+            } else {
+                actViewModel.deleteAttribute(newAttribute);
+            }
+        } else {
+            Toast.makeText(this, "Editing cancelled", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 }

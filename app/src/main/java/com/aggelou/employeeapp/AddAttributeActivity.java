@@ -33,6 +33,15 @@ public class AddAttributeActivity extends AppCompatActivity {
                 addAttribute();
             }
         });
+
+        cancelAddingAttr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(Attributes.FRAGMENT_RESULT_CODE_CANCEL, intent);
+                finish();
+            }
+        });
     }
 
     private void addAttribute(){
