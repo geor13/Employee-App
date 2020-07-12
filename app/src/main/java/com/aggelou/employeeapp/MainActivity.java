@@ -16,8 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import database.AttributesModel;
+import database.EmployeesModel;
 
-public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener {
+public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener, EmployeesAdapter.EmployeeAdapterListener {
     private BottomNavigationView bottomNav;
     private PageViewModel actViewModel;
 
@@ -106,6 +107,16 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
         } else {
             Toast.makeText(this, "Editing cancelled", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    @Override
+    public void deleteClickedEmployee(EmployeesModel employee) {
+        actViewModel.deleteEmployee(employee);
+    }
+
+    @Override
+    public void editClickedEmployee(EmployeesModel employee) {
 
     }
 }

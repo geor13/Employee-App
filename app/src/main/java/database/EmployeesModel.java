@@ -10,11 +10,12 @@ import java.util.Date;
 @Entity(tableName = "Employees")
 public class EmployeesModel {
 
-    public EmployeesModel(String employeeName, Date employeeDateOfBirth, boolean hasCar, String homeAddress){
+    public EmployeesModel(String employeeName,String employeeSurname, Date employeeDateOfBirth, boolean hasCar, String homeAddress){
         this.employeeName = employeeName;
         this.employeeDateOfBirth = employeeDateOfBirth;
         this.hasCar = hasCar;
         this.homeAddress = homeAddress;
+        this.employeeSurname = employeeSurname;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -33,6 +34,13 @@ public class EmployeesModel {
 
     @ColumnInfo(name = "homeAddress")
     private String homeAddress;
+
+    @ColumnInfo(name = "employeeSurname")
+    private String employeeSurname;
+
+    public String getEmployeeSurname() {
+        return employeeSurname;
+    }
 
     public void setEmployeeID(int employeeID) {
         this.employeeID = employeeID;

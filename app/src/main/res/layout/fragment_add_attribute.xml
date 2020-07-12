@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddAttributeActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddAttributeFragment">
 
     <TextView
-        android:id="@+id/new_attribute_title"
+        android:id="@+id/new_attribute_title_fr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -20,9 +21,9 @@
         android:layout_marginStart="36dp"
         android:layout_marginTop="32dp"
         android:text="@string/attribute_name"/>
-    
+
     <EditText
-        android:id="@+id/enter_attribute_name"
+        android:id="@+id/enter_attribute_name_fr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/new_attribute_hint"
@@ -31,12 +32,12 @@
         android:textStyle="normal"
         android:textColor="#707070"
         android:lineSpacingExtra="5sp"
-        app:layout_constraintTop_toBottomOf="@id/new_attribute_title"
+        app:layout_constraintTop_toBottomOf="@id/new_attribute_title_fr"
         android:layout_marginTop="13dp"
-        app:layout_constraintStart_toStartOf="@id/new_attribute_title"/>
+        app:layout_constraintStart_toStartOf="@id/new_attribute_title_fr"/>
 
     <TextView
-        android:id="@+id/cancel_button"
+        android:id="@+id/cancel_button_fr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -46,12 +47,12 @@
         android:textStyle="normal"
         android:textColor="#707070"
         android:lineSpacingExtra="5sp"
-        app:layout_constraintStart_toStartOf="@id/new_attribute_title"
-        app:layout_constraintTop_toBottomOf="@id/enter_attribute_name"
+        app:layout_constraintStart_toStartOf="@id/new_attribute_title_fr"
+        app:layout_constraintTop_toBottomOf="@id/enter_attribute_name_fr"
         android:layout_marginTop="49dp"/>
 
     <TextView
-        android:id="@+id/create_button"
+        android:id="@+id/create_button_fr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -61,11 +62,10 @@
         android:textStyle="normal"
         android:textColor="#1e3d65"
         android:lineSpacingExtra="5sp"
-        app:layout_constraintStart_toEndOf="@id/cancel_button"
+        app:layout_constraintStart_toEndOf="@id/cancel_button_fr"
         android:layout_marginStart="18dp"
-        app:layout_constraintBottom_toBottomOf="@id/cancel_button"
+        app:layout_constraintBottom_toBottomOf="@id/cancel_button_fr"
         android:layout_marginTop="49dp"/>
-
 
 
 

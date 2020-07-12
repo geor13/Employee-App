@@ -85,14 +85,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/save_edit"
         app:layout_constraintStart_toEndOf="@id/cancel_edit"
-        app:layout_constraintTop_toTopOf="@id/cancel_edit"
+        app:layout_constraintBottom_toBottomOf="@id/cancel_edit"
         android:text="@string/save_edit"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:textSize="16sp"
         android:fontFamily="sans-serif-medium"
         android:textStyle="normal"
         android:textColor="#1e3d65"
         android:lineSpacingExtra="5sp"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

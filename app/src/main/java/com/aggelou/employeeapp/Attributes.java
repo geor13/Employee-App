@@ -1,16 +1,16 @@
 package com.aggelou.employeeapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,10 +24,6 @@ public class Attributes extends Fragment {
     private RecyclerView attributesList;
     private Button addNewAttributeButton;
     private PageViewModel fragViewModel;
-
-    private static final int ADD_NOTE_REQUEST_CODE = 1;
-    public static final int FRAGMENT_RESULT_CODE_SUCCESS = 12;
-    public static final int FRAGMENT_RESULT_CODE_CANCEL = 13;
 
     public static Attributes getAttrInstance(){
         return new Attributes();
@@ -43,11 +39,6 @@ public class Attributes extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_attributes, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -69,8 +60,12 @@ public class Attributes extends Fragment {
         addNewAttributeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddAttributeActivity.class);
-                startActivityForResult(intent, ADD_NOTE_REQUEST_CODE);
+                Fragment addAttribute = new AddAttributeFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragments_container, addAttribute);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
@@ -81,20 +76,6 @@ public class Attributes extends Fragment {
                 adapter.changeAttributes(attributesModels);
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == ADD_NOTE_REQUEST_CODE && resultCode == FRAGMENT_RESULT_CODE_SUCCESS){
-            String title = data.getStringExtra(AddAttributeActivity.EXTRA_TITLE);
-            AttributesModel attribute = new AttributesModel(title);
-            fragViewModel.insertAttribute(attribute);
-            Toast.makeText(getActivity(), "Attribute saved", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getActivity(), "Canceled adding attribute", Toast.LENGTH_SHORT).show();
-        }
     }
 
 }
