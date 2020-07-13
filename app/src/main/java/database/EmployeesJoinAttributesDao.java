@@ -18,6 +18,6 @@ public interface EmployeesJoinAttributesDao {
     void deleteLists(int attributeID);
 
 
-    @Query("SELECT * FROM Attributes INNER JOIN Employee_Attribute_Join ON Attributes.attrID = Employee_Attribute_Join.attribute_id WHERE Employee_Attribute_Join.employee_id = :employeeID")
+    @Query("SELECT * FROM Attributes INNER JOIN Employee_Attribute_Join ON Attributes.attribute_ID = Employee_Attribute_Join.attribute_id WHERE Employee_Attribute_Join.employee_id = :employeeID")
     LiveData<List<AttributesModel>> getAttributesFromUser(int employeeID);
 }

@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import database.AttributesModel;
+import database.EmployeesJoinAttributes;
 import database.EmployeesModel;
 
 public class PageViewModel extends AndroidViewModel {
@@ -24,6 +25,10 @@ public class PageViewModel extends AndroidViewModel {
         repository = new Repository(application);
         attributesList = repository.getAttributesList();
         employeesList = repository.getEmployeesList();
+    }
+
+    public void insertAttributeToEmployee(EmployeesJoinAttributes employeeAttrLink){
+        repository.insertEmployeeAttributeLink(employeeAttrLink);
     }
 
     public void deleteAttributeFromJoint(int attributeID){

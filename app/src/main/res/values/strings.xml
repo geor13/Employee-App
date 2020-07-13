@@ -13,7 +13,15 @@
     <string name="no_delete_checkbox">NO</string>
     <string name="delete_heading">Delete Attribute</string>
     <string name="save_edit">DONE</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_employee_name">Add employee name</string>
+    <string name="new_employee_surname">Add employee surname</string>
+    <string name="new_employee_date">Add employee date of birth</string>
+    <string name="employee_day">Day</string>
+    <string name="employee_month">Month</string>
+    <string name="employee_year">Year</string>
+    <string name="employee_car">Has car</string>
+    <string name="employee_address">Address of the employee</string>
+    <string name="attributes_available">Available attributes</string>
+
 
 </resources>

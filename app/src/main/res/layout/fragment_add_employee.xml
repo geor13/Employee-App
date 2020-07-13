@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddEmployeeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/add_employee_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_employee_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/add_employee_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_header"
+            android:text="@string/new_employee_name"/>
+
+        <TextView
+            android:id="@+id/add_employee_header_surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_employee_surname"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_name"/>
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/add_employee_surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_header_surname"
+            android:text="@string/new_employee_surname"/>
+
+
+        <TextView
+            android:id="@+id/add_employee_dob_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_employee_date"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_surname"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"/>
+        <TextView
+            android:id="@+id/day_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_day"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_dob_header"/>
+
+        <NumberPicker
+            android:id="@+id/employee_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/day_header"/>
+
+        <TextView
+            android:id="@+id/month_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_month"
+            app:layout_constraintStart_toEndOf="@id/employee_day"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_dob_header"/>
+
+        <NumberPicker
+            android:id="@+id/employee_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/employee_day"
+            app:layout_constraintStart_toStartOf="@id/month_header"/>
+
+        <TextView
+            android:id="@+id/year_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_year"
+            app:layout_constraintStart_toEndOf="@id/employee_month"
+            app:layout_constraintTop_toBottomOf="@id/add_employee_dob_header"/>
+
+        <NumberPicker
+            android:id="@+id/employee_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/year_header"
+            app:layout_constraintTop_toBottomOf="@id/year_header"/>
+
+        <TextView
+            android:id="@+id/car_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_car"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/employee_day"/>
+        <CheckBox
+            android:id="@+id/has_car_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_checkbox"
+            app:layout_constraintStart_toStartOf="@id/car_header"
+            app:layout_constraintTop_toBottomOf="@id/car_header"/>
+        <CheckBox
+            android:id="@+id/has_car_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/has_car_yes"
+            android:text="@string/no_delete_checkbox"
+            app:layout_constraintStart_toEndOf="@id/has_car_yes"/>
+
+        <TextView
+            android:id="@+id/address_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_address"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/has_car_yes"/>
+
+        <EditText
+            android:id="@+id/address_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employee_address"
+            app:layout_constraintStart_toStartOf="@id/car_header"
+            app:layout_constraintTop_toBottomOf="@id/address_header"/>
+
+        <TextView
+            android:id="@+id/attributes_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attributes_available"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/address_add"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/attributes_list_employee"
+            android:layout_width="312dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/attributes_available"
+            app:layout_constraintStart_toStartOf="@id/attributes_available"
+            tools:listitem="@layout/single_attribute_listv2"/>
+
+        <TextView
+            android:id="@+id/cancel_employee_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_btn"
+            app:layout_constraintStart_toStartOf="@id/add_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/attributes_list_employee"
+            android:layout_marginBottom="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/confirm_employee_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_btn"
+            app:layout_constraintBottom_toBottomOf="@id/cancel_employee_add"
+            app:layout_constraintStart_toEndOf="@id/cancel_employee_add"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

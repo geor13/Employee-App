@@ -5,13 +5,13 @@ import androidx.room.ForeignKey;
 
 @Entity(
         tableName = "Employee_Attribute_Join",
-        primaryKeys = {"employee_id", "attribute_id"},
+        primaryKeys = {"attribute_id", "employee_id"},
         foreignKeys = {
                 @ForeignKey(entity = AttributesModel.class,
-                            parentColumns = "attrID",
+                            parentColumns = "attribute_ID",
                             childColumns = "attribute_id"),
                 @ForeignKey(entity = EmployeesModel.class,
-                            parentColumns = "employeeID",
+                            parentColumns = "employee_ID",
                             childColumns = "employee_id")}
 
 )

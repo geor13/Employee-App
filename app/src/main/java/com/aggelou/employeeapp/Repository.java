@@ -10,6 +10,7 @@ import java.util.List;
 import database.ApplicationDatabase;
 import database.AttributesModel;
 import database.AttributesModelDao;
+import database.EmployeesJoinAttributes;
 import database.EmployeesJoinAttributesDao;
 import database.EmployeesModel;
 import database.EmployeesModelDao;
@@ -35,6 +36,11 @@ public class Repository {
         //GETTING Lists
         attributes = attributesDAO.getAllAttributes();
         employees = employeesDAO.getAllEmployees();
+    }
+
+    //INSERT AN ATTRIBUTE - EMPLOYEE JOIN IN JOIN TABLE
+    public void insertEmployeeAttributeLink(EmployeesJoinAttributes employeeAttrLink){
+        new InsertAttributeEmployeeLink(employeesJoinAttributesDao).execute(employeeAttrLink);
     }
 
     //INSERT AN EMPLOYEE TO THE EMPLOYEE TABLE
@@ -77,6 +83,7 @@ public class Repository {
         new DeleteAttributesFromJointAsyncTask(employeesJoinAttributesDao).execute(attributeID);
     }
 
+
     //ASYNC TASKS FOR THE INSERT AND DELETE OPERATIONS
 
     //ASYNC TASK TO DELETE SPECIFIC ATTRIBUTES FROM JOINT TABLE (AND FROM USERS RESPECTIVELY)
@@ -106,6 +113,21 @@ public class Repository {
         @Override
         protected Void doInBackground(EmployeesModel... employeesModels) {
             employeeDao.insert(employeesModels[0]);
+            return null;
+        }
+    }
+
+    //ASYNC TASK TO INSERT EMPLOYEE - ATTRIBUTE LINK TO JOIN TABLE
+    private  static class InsertAttributeEmployeeLink extends AsyncTask<EmployeesJoinAttributes, Void, Void>{
+        private EmployeesJoinAttributesDao joinDao;
+
+        private InsertAttributeEmployeeLink(EmployeesJoinAttributesDao joinDao){
+            this.joinDao = joinDao;
+        }
+
+        @Override
+        protected Void doInBackground(EmployeesJoinAttributes... employeesJoinAttributes) {
+            joinDao.insert(employeesJoinAttributes[0]);
             return null;
         }
     }

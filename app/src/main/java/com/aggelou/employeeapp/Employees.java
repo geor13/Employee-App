@@ -94,10 +94,10 @@ public class Employees extends Fragment {
         addEmployeeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment addAttribute = new AddAttributeFragment();
+                Fragment addEmployee = new AddEmployeeFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragments_container, addAttribute);
+                fragmentTransaction.replace(R.id.fragments_container, addEmployee);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
