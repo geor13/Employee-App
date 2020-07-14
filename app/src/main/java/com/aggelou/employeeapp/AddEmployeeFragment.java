@@ -27,7 +27,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import database.AttributesModel;
-import database.EmployeesJoinAttributes;
+import database.EmployeesAndAttributes;
 import database.EmployeesModel;
 
 public class AddEmployeeFragment extends Fragment {
@@ -153,7 +153,7 @@ public class AddEmployeeFragment extends Fragment {
                 int year = addEmployeeYear.getValue();
                 boolean hasCar = hasCarYes.isChecked();
 
-                ArrayList<EmployeesJoinAttributes> joints = new ArrayList<>();
+                ArrayList<EmployeesAndAttributes> joints = new ArrayList<>();
 
                 Calendar myCalendar = new GregorianCalendar(year, month-1, day);
                 Date employeeDate = myCalendar.getTime();
@@ -166,14 +166,22 @@ public class AddEmployeeFragment extends Fragment {
 
                 for(int i = 0; i < listAttributes.size(); i++){
                     if(listAttributes.get(i).isClicked()){
-                        EmployeesJoinAttributes join = new EmployeesJoinAttributes(employee.getEmployeeID(), listAttributes.get(i).getAttrID());
+                        EmployeesAndAttributes join = new EmployeesAndAttributes(employee.getEmployeeID(), listAttributes.get(i).getAttrID());
                         joints.add(join);
+
                         //I NEED TO INSERT IT !!!  --- MIGHT BREAK
                     }
                 }
 
                 //SOMETHING IS WRONG WITH THE FOREIGN KEYS IN THE JOINT MODEL IN DATABASE !!!!!
-                EmployeesJoinAttributes join = new EmployeesJoinAttributes(0, 0); // sTEST
+//                SOMETHING IS WRONG HERE
+//                SOMETHING IS WRONG HERE
+//                SOMETHING IS WRONG HERE
+//                SOMETHING IS WRONG HERE
+//                TRYING TO ADD THE CONNECTION OBJECT TO THE CONNECTION TABLE
+//                CORRECTED !!!!!! CONTINUE AFTER LUNCH
+
+                EmployeesAndAttributes join = new EmployeesAndAttributes(0,0); // TEST
                 addEmployeeViewModel.insertAttributeToEmployee(join);                                 // TEST
 
 

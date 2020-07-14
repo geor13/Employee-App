@@ -9,7 +9,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import database.AttributesModel;
-import database.EmployeesJoinAttributes;
+import database.EmployeeWithAttributes;
+import database.EmployeesAndAttributes;
 import database.EmployeesModel;
 
 public class PageViewModel extends AndroidViewModel {
@@ -17,6 +18,7 @@ public class PageViewModel extends AndroidViewModel {
     private Repository repository;
     private LiveData<List<AttributesModel>> attributesList;
     private LiveData<List<EmployeesModel>> employeesList;
+    private LiveData<List<EmployeeWithAttributes>> employeesWithAttributesList;
 
 
     public PageViewModel(@NonNull Application application) {
@@ -25,15 +27,13 @@ public class PageViewModel extends AndroidViewModel {
         repository = new Repository(application);
         attributesList = repository.getAttributesList();
         employeesList = repository.getEmployeesList();
+        employeesWithAttributesList = repository.getEmployeesWithAttributes();
     }
 
-    public void insertAttributeToEmployee(EmployeesJoinAttributes employeeAttrLink){
+    public void insertAttributeToEmployee(EmployeesAndAttributes employeeAttrLink){
         repository.insertEmployeeAttributeLink(employeeAttrLink);
     }
 
-    public void deleteAttributeFromJoint(int attributeID){
-        repository.deleteAttributesFromUsers(attributeID);
-    }
 
     public void insertEmployee (EmployeesModel employee){
         repository.insertEmployee(employee);
@@ -59,7 +59,8 @@ public class PageViewModel extends AndroidViewModel {
         return employeesList;
     }
 
-    public LiveData<List<AttributesModel>> getEmployeeAttributes(int employeeID){
-        return repository.getEmployeeAttributes(employeeID);
+    public LiveData<List<EmployeeWithAttributes>> getEmployeesWithAttributes(){
+        return employeesWithAttributesList;
     }
+
 }

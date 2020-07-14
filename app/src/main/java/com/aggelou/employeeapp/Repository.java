@@ -10,19 +10,20 @@ import java.util.List;
 import database.ApplicationDatabase;
 import database.AttributesModel;
 import database.AttributesModelDao;
-import database.EmployeesJoinAttributes;
-import database.EmployeesJoinAttributesDao;
+import database.EmployeeWithAttributes;
+import database.EmployeesAndAttributes;
+import database.EmployeesAndAttributesDao;
 import database.EmployeesModel;
 import database.EmployeesModelDao;
 
 public class Repository {
     private AttributesModelDao attributesDAO;
     private EmployeesModelDao employeesDAO;
-    private EmployeesJoinAttributesDao employeesJoinAttributesDao;
+    private EmployeesAndAttributesDao employeesAndAttributesDao;
 
     private LiveData<List<AttributesModel>> attributes;
     private LiveData<List<EmployeesModel>> employees;
-    private LiveData<List<AttributesModel>> attributesOfEmployee;
+    private LiveData<List<EmployeeWithAttributes>> employeesWithAttributes;
 
     public Repository(Application application){
         //INITIALIZE DATABASE
@@ -31,16 +32,17 @@ public class Repository {
         //INITIALIZE DAO
         attributesDAO = database.getAttributesDao();
         employeesDAO = database.getEmployeesDao();
-        employeesJoinAttributesDao = database.getEmployeesJoinAttributesDao();
+        employeesAndAttributesDao = database.getEmployeesAndAttributesDao();
 
         //GETTING Lists
         attributes = attributesDAO.getAllAttributes();
         employees = employeesDAO.getAllEmployees();
+        employeesWithAttributes = employeesAndAttributesDao.getEmployeesWithAttributes();
     }
 
     //INSERT AN ATTRIBUTE - EMPLOYEE JOIN IN JOIN TABLE
-    public void insertEmployeeAttributeLink(EmployeesJoinAttributes employeeAttrLink){
-        new InsertAttributeEmployeeLink(employeesJoinAttributesDao).execute(employeeAttrLink);
+    public void insertEmployeeAttributeLink(EmployeesAndAttributes employeeAttrLink){
+        new InsertAttributeEmployeeLink(employeesAndAttributesDao).execute(employeeAttrLink);
     }
 
     //INSERT AN EMPLOYEE TO THE EMPLOYEE TABLE
@@ -63,10 +65,6 @@ public class Repository {
         new DeleteAttributesAsyncTsk(attributesDAO).execute(attribute);
     }
 
-    //RETRIEVE ALL ATTRIBUTES FROM A USER
-    public LiveData<List<AttributesModel>> getEmployeeAttributes(int employeeID){
-        return employeesJoinAttributesDao.getAttributesFromUser(employeeID);
-    }
 
     //RETRIEVE ALL ATTRIBUTES FROM ATTRIBUTES TABLE
     public LiveData<List<AttributesModel>> getAttributesList(){
@@ -78,28 +76,11 @@ public class Repository {
         return employees;
     }
 
-    //DELETE SPECIFIC ATTRIBUTES FROM JOINT TABLE
-    public void deleteAttributesFromUsers(int attributeID){
-        new DeleteAttributesFromJointAsyncTask(employeesJoinAttributesDao).execute(attributeID);
+    public LiveData<List<EmployeeWithAttributes>> getEmployeesWithAttributes(){
+        return employeesWithAttributes;
     }
-
 
     //ASYNC TASKS FOR THE INSERT AND DELETE OPERATIONS
-
-    //ASYNC TASK TO DELETE SPECIFIC ATTRIBUTES FROM JOINT TABLE (AND FROM USERS RESPECTIVELY)
-    private static class DeleteAttributesFromJointAsyncTask extends AsyncTask<Integer, Void, Void>{
-
-        private EmployeesJoinAttributesDao employeesAndAttributes;
-        private DeleteAttributesFromJointAsyncTask(EmployeesJoinAttributesDao employeesAndAttributes){
-            this.employeesAndAttributes = employeesAndAttributes;
-        }
-
-        @Override
-        protected Void doInBackground(Integer... ints) {
-            employeesAndAttributes.deleteLists(ints[0]);
-            return null;
-        }
-    }
 
     //ASYNC TASK TO INSERT EMPLOYEE TO EMPLOYEE TABLE
     private static class InsertEmployeeAsyncTask extends AsyncTask<EmployeesModel, Void, Void> {
@@ -118,16 +99,16 @@ public class Repository {
     }
 
     //ASYNC TASK TO INSERT EMPLOYEE - ATTRIBUTE LINK TO JOIN TABLE
-    private  static class InsertAttributeEmployeeLink extends AsyncTask<EmployeesJoinAttributes, Void, Void>{
-        private EmployeesJoinAttributesDao joinDao;
+    private  static class InsertAttributeEmployeeLink extends AsyncTask<EmployeesAndAttributes, Void, Void>{
+        private EmployeesAndAttributesDao joinDao;
 
-        private InsertAttributeEmployeeLink(EmployeesJoinAttributesDao joinDao){
+        private InsertAttributeEmployeeLink(EmployeesAndAttributesDao joinDao){
             this.joinDao = joinDao;
         }
 
         @Override
-        protected Void doInBackground(EmployeesJoinAttributes... employeesJoinAttributes) {
-            joinDao.insert(employeesJoinAttributes[0]);
+        protected Void doInBackground(EmployeesAndAttributes... employeesAndAttributes) {
+            joinDao.insertLink(employeesAndAttributes[0]);
             return null;
         }
     }
