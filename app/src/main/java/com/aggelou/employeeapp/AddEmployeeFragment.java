@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -153,8 +152,6 @@ public class AddEmployeeFragment extends Fragment {
                 int year = addEmployeeYear.getValue();
                 boolean hasCar = hasCarYes.isChecked();
 
-                ArrayList<EmployeesAndAttributes> joints = new ArrayList<>();
-
                 Calendar myCalendar = new GregorianCalendar(year, month-1, day);
                 Date employeeDate = myCalendar.getTime();
 
@@ -163,27 +160,12 @@ public class AddEmployeeFragment extends Fragment {
                 addEmployeeViewModel.insertEmployee(employee);
 
                 //GET THE CLICKED ATTRIBUTES AND MAKE CONNECTION ME THE EMPLOYEE !!
-
                 for(int i = 0; i < listAttributes.size(); i++){
                     if(listAttributes.get(i).isClicked()){
                         EmployeesAndAttributes join = new EmployeesAndAttributes(employee.getEmployeeID(), listAttributes.get(i).getAttrID());
-                        joints.add(join);
-
-                        //I NEED TO INSERT IT !!!  --- MIGHT BREAK
+                        addEmployeeViewModel.insertAttributeToEmployee(join);
                     }
                 }
-
-                //SOMETHING IS WRONG WITH THE FOREIGN KEYS IN THE JOINT MODEL IN DATABASE !!!!!
-//                SOMETHING IS WRONG HERE
-//                SOMETHING IS WRONG HERE
-//                SOMETHING IS WRONG HERE
-//                SOMETHING IS WRONG HERE
-//                TRYING TO ADD THE CONNECTION OBJECT TO THE CONNECTION TABLE
-//                CORRECTED !!!!!! CONTINUE AFTER LUNCH
-
-                EmployeesAndAttributes join = new EmployeesAndAttributes(0,0); // TEST
-                addEmployeeViewModel.insertAttributeToEmployee(join);                                 // TEST
-
 
                 Fragment back = Employees.getEmployeesInstance();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -191,7 +173,6 @@ public class AddEmployeeFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragments_container, back);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
             }
         });
     }

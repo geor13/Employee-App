@@ -4,10 +4,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "Employees")
-public class EmployeesModel {
+public class EmployeesModel implements Serializable {
 
     public EmployeesModel(String employeeName,String employeeSurname, Date employeeDateOfBirth, boolean hasCar, String homeAddress){
         this.employeeName = employeeName;

@@ -21,7 +21,8 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
     private PageViewModel actViewModel;
 
     public static final String THE_MODEL = "com.aggelou.employeeapp.THE_MODEL";
-    public static final int EDIT_ATTRIBUTE_REQUEST = 1;
+    public static final String THE_EMPLOYEE = "com.aggelou.employeeapp.THE_EMPLOYEE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +103,13 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
 
     @Override
     public void editClickedEmployee(EmployeesModel employee) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(THE_EMPLOYEE, employee);
 
+        EditEmployeeFragment editemployee = EditEmployeeFragment.newInstance();
+        editemployee.setArguments(bundle);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragments_container, editemployee).addToBackStack(null).commit();
     }
 }

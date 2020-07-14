@@ -54,6 +54,15 @@ public class EmployeesAdapter extends RecyclerView.Adapter<EmployeesAdapter.View
           }
       });
 
+      holder.employeeName.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              if(listener != null){
+                  listener.editClickedEmployee(employees.get(position));
+              }
+          }
+      });
+
     }
 
     public void changeEmployees(List<EmployeesModel> employees){
