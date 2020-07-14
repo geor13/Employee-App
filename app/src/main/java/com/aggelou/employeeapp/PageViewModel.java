@@ -19,6 +19,7 @@ public class PageViewModel extends AndroidViewModel {
     private LiveData<List<AttributesModel>> attributesList;
     private LiveData<List<EmployeesModel>> employeesList;
     private LiveData<List<EmployeeWithAttributes>> employeesWithAttributesList;
+    private LiveData<List<EmployeesAndAttributes>> employeesAndAttributes;
 
 
     public PageViewModel(@NonNull Application application) {
@@ -28,6 +29,19 @@ public class PageViewModel extends AndroidViewModel {
         attributesList = repository.getAttributesList();
         employeesList = repository.getEmployeesList();
         employeesWithAttributesList = repository.getEmployeesWithAttributes();
+        employeesAndAttributes = repository.getEmployeesAndAttributes();
+    }
+
+    public LiveData<List<EmployeesAndAttributes>> getEmployeesAndAttributes(){
+        return employeesAndAttributes;
+    }
+
+    public void deleteAttributeEmployeeLink(EmployeesAndAttributes employeesAndAttributes){
+        repository.deleteEmployeeAttributeLink(employeesAndAttributes);
+    }
+
+    public void deleteSpecifiedLink(int attributeID, int employeeID){
+        repository.deleteSpecifiedLink(attributeID, employeeID);
     }
 
     public void insertAttributeToEmployee(EmployeesAndAttributes employeeAttrLink){

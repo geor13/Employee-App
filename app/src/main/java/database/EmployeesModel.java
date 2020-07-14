@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
 @Entity(tableName = "Employees")
 public class EmployeesModel implements Serializable {
@@ -16,9 +17,13 @@ public class EmployeesModel implements Serializable {
         this.hasCar = hasCar;
         this.homeAddress = homeAddress;
         this.employeeSurname = employeeSurname;
+
+        Random rand = new Random();
+        this.employeeID = rand.nextInt();
     }
 
-    @PrimaryKey(autoGenerate = true)
+
+    @PrimaryKey
     @ColumnInfo(name = "employee_ID")
     private int employeeID;
 

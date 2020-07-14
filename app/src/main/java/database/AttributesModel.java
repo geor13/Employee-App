@@ -6,6 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.Random;
 
 @Entity(tableName = "Attributes")
 public class AttributesModel implements Serializable {
@@ -13,9 +14,12 @@ public class AttributesModel implements Serializable {
     public AttributesModel(String attrName){
         this.attrName = attrName;
         this.isClicked = false;
+
+        Random rand = new Random();
+        this.attrID = rand.nextInt();
     }
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "attribute_ID")
     private int attrID;
 

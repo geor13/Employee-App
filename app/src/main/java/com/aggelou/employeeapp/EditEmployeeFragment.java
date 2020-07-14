@@ -12,11 +12,17 @@ import android.widget.NumberPicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import database.EmployeeWithAttributes;
 import database.EmployeesModel;
 
 
@@ -31,6 +37,10 @@ public class EditEmployeeFragment extends Fragment {
     private NumberPicker employeeDay;
     private NumberPicker employeeMonth;
     private NumberPicker employeeYear;
+
+    private PageViewModel editEmployeeViewModel;
+
+    private List<EmployeeWithAttributes> employees;
 
 
     public EditEmployeeFragment() {
@@ -113,7 +123,27 @@ public class EditEmployeeFragment extends Fragment {
             }
         });
 
-        //IMPLEMENT THE ADAPTER FOR THE RECYCLER VIEW AND POPULATE IT USING THE CONNECTION
+
+        employeeAttributesList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        final EmployeeAttributesAdapter adapter = new EmployeeAttributesAdapter(getActivity(), employee);
+        employeeAttributesList.setAdapter(adapter);
+
+        employees = new ArrayList<>();
+
+        editEmployeeViewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
+
+        editEmployeeViewModel.getEmployeesWithAttributes().observe(getViewLifecycleOwner(), new Observer<List<EmployeeWithAttributes>>() {
+            @Override
+            public void onChanged(List<EmployeeWithAttributes> employeeWithAttributes) {
+                employees = employeeWithAttributes;
+                for(int i = 0; i < employees.size(); i++){
+                    if(employees.get(i).employee.getEmployeeID() == employee.getEmployeeID()){
+                        adapter.ChangeAttributeList(employees.get(i).attributes);
+                        break;
+                    }
+                }
+            }
+        });
 
     }
 }

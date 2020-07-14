@@ -24,6 +24,7 @@ public class Repository {
     private LiveData<List<AttributesModel>> attributes;
     private LiveData<List<EmployeesModel>> employees;
     private LiveData<List<EmployeeWithAttributes>> employeesWithAttributes;
+    private LiveData<List<EmployeesAndAttributes>> employeesAndAttributes;
 
     public Repository(Application application){
         //INITIALIZE DATABASE
@@ -38,6 +39,15 @@ public class Repository {
         attributes = attributesDAO.getAllAttributes();
         employees = employeesDAO.getAllEmployees();
         employeesWithAttributes = employeesAndAttributesDao.getEmployeesWithAttributes();
+        employeesAndAttributes = employeesAndAttributesDao.getEmployeesAndAttributes();
+    }
+
+    public void deleteSpecifiedLink(int attributeID, int employeeID){
+        new DeleteSpecificLinkAsync(employeesAndAttributesDao).execute(attributeID, employeeID);
+    }
+
+    public void deleteEmployeeAttributeLink(EmployeesAndAttributes employeesAndAttributes){
+        new DeleteAttributeAndEmployeeLinkAsync(employeesAndAttributesDao).execute(employeesAndAttributes);
     }
 
     //INSERT AN ATTRIBUTE - EMPLOYEE JOIN IN JOIN TABLE
@@ -80,7 +90,39 @@ public class Repository {
         return employeesWithAttributes;
     }
 
+    public LiveData<List<EmployeesAndAttributes>> getEmployeesAndAttributes(){
+        return employeesAndAttributes;
+    }
+
     //ASYNC TASKS FOR THE INSERT AND DELETE OPERATIONS
+    private static class DeleteSpecificLinkAsync extends AsyncTask<Integer, Void, Void>{
+
+        private EmployeesAndAttributesDao deleteDao;
+        private DeleteSpecificLinkAsync(EmployeesAndAttributesDao deleteDao){
+            this.deleteDao = deleteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            deleteDao.deleteSpecifiedLink(integers[0], integers[1]);
+            return null;
+        }
+    }
+
+    //ASYNC TASK TO DELETE EMPLOYEE AND ATTRIBUTE LINK
+    private static class DeleteAttributeAndEmployeeLinkAsync extends AsyncTask<EmployeesAndAttributes, Void, Void>{
+        private EmployeesAndAttributesDao deleteDao;
+
+        private DeleteAttributeAndEmployeeLinkAsync(EmployeesAndAttributesDao deleteDao){
+            this.deleteDao = deleteDao;
+        }
+
+        @Override
+        protected Void doInBackground(EmployeesAndAttributes... employeesAndAttributes) {
+            deleteDao.deleteLink(employeesAndAttributes[0]);
+            return null;
+        }
+    }
 
     //ASYNC TASK TO INSERT EMPLOYEE TO EMPLOYEE TABLE
     private static class InsertEmployeeAsyncTask extends AsyncTask<EmployeesModel, Void, Void> {

@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import database.AttributesModel;
 import database.EmployeesModel;
 
-public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener, EmployeesAdapter.EmployeeAdapterListener {
+public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener, EmployeesAdapter.EmployeeAdapterListener, EmployeeAttributesAdapter.AttributesInEmployeeListener {
     private BottomNavigationView bottomNav;
     private PageViewModel actViewModel;
 
@@ -111,5 +111,10 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragments_container, editemployee).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void deleteAttributeInEmployee(EmployeesModel employee, AttributesModel attribute) {
+        actViewModel.deleteSpecifiedLink(attribute.getAttrID(), employee.getEmployeeID());
     }
 }

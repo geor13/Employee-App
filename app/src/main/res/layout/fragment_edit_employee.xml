@@ -165,7 +165,7 @@
             android:id="@+id/confirm_employee_add_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_btn"
+            android:text="@string/save_edit"
             app:layout_constraintBottom_toBottomOf="@id/cancel_employee_edit"
             app:layout_constraintStart_toEndOf="@id/cancel_employee_edit"/>
 

@@ -157,6 +157,7 @@ public class AddEmployeeFragment extends Fragment {
 
                 EmployeesModel employee = new EmployeesModel(name, surname, employeeDate, hasCar, address);
 
+
                 addEmployeeViewModel.insertEmployee(employee);
 
                 //GET THE CLICKED ATTRIBUTES AND MAKE CONNECTION ME THE EMPLOYEE !!
@@ -164,8 +165,11 @@ public class AddEmployeeFragment extends Fragment {
                     if(listAttributes.get(i).isClicked()){
                         EmployeesAndAttributes join = new EmployeesAndAttributes(employee.getEmployeeID(), listAttributes.get(i).getAttrID());
                         addEmployeeViewModel.insertAttributeToEmployee(join);
+
+                        listAttributes.get(i).setClicked(false);
                     }
                 }
+
 
                 Fragment back = Employees.getEmployeesInstance();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
