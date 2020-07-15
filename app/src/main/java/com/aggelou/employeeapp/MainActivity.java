@@ -13,12 +13,16 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import database.AttributesModel;
 import database.EmployeesModel;
 
-public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener, EmployeesAdapter.EmployeeAdapterListener, EmployeeAttributesAdapter.AttributesInEmployeeListener {
+public class MainActivity extends AppCompatActivity implements AttributesAdapter.AdapterListener, EmployeesAdapter.EmployeeAdapterListener, EmployeeAttributesAdapter.AttributesInEmployeeListener, SelectedAttributesAdapter.SelectAttributeListener, Maps.EmptySearchListener {
     private BottomNavigationView bottomNav;
     private PageViewModel actViewModel;
+    private List<AttributesModel> selectedAttributes;
 
     public static final String THE_MODEL = "com.aggelou.employeeapp.THE_MODEL";
     public static final String THE_EMPLOYEE = "com.aggelou.employeeapp.THE_EMPLOYEE";
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
         displayAttributes();
 
         actViewModel = new ViewModelProvider(this).get(PageViewModel.class);
+        selectedAttributes = new ArrayList<>();
 
     }
 
@@ -116,5 +121,22 @@ public class MainActivity extends AppCompatActivity implements AttributesAdapter
     @Override
     public void deleteAttributeInEmployee(EmployeesModel employee, AttributesModel attribute) {
         actViewModel.deleteSpecifiedLink(attribute.getAttrID(), employee.getEmployeeID());
+    }
+
+    @Override
+    public void addToSelectedAttributes(AttributesModel attribute) {
+        selectedAttributes.add(attribute);
+        actViewModel.setSelectedAttributes(selectedAttributes);
+    }
+
+    @Override
+    public void removeSelectedAttribute(AttributesModel attribute) {
+        selectedAttributes.remove(attribute);
+        actViewModel.setSelectedAttributes(selectedAttributes);
+    }
+
+    @Override
+    public void emptyAttributesList() {
+        selectedAttributes.clear();
     }
 }

@@ -22,8 +22,9 @@
     <string name="employee_car">Has car</string>
     <string name="employee_address">Address of the employee</string>
     <string name="attributes_available">Available attributes</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_employee">Search for employee</string>
+    <string name="search_text">SEARCH</string>
+    <string name="employees_available">Available employees</string>
 
 
 </resources>

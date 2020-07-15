@@ -8,10 +8,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,6 +40,7 @@ public class EditEmployeeFragment extends Fragment {
     private NumberPicker employeeDay;
     private NumberPicker employeeMonth;
     private NumberPicker employeeYear;
+    private TextView confirmEdit;
 
     private PageViewModel editEmployeeViewModel;
 
@@ -80,6 +84,7 @@ public class EditEmployeeFragment extends Fragment {
             employeeMonth = getView().findViewById(R.id.employee_month_edit);
             employeeYear = getView().findViewById(R.id.employee_year_edit);
             employeeAttributesList = getView().findViewById(R.id.attributes_list_employee_has);
+            confirmEdit = getView().findViewById(R.id.confirm_employee_edit);
         }
 
         employee = (EmployeesModel) getArguments().getSerializable(MainActivity.THE_EMPLOYEE);
@@ -142,6 +147,19 @@ public class EditEmployeeFragment extends Fragment {
                         break;
                     }
                 }
+            }
+        });
+
+        confirmEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Fragment back = Employees.getEmployeesInstance();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragments_container, back);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

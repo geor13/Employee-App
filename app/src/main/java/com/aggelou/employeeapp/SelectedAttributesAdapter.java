@@ -15,14 +15,21 @@ import java.util.List;
 
 import database.AttributesModel;
 
-public class AddEmployeeAttrAdapter extends RecyclerView.Adapter<AddEmployeeAttrAdapter.ViewHolder>{
+public class SelectedAttributesAdapter extends RecyclerView.Adapter<SelectedAttributesAdapter.ViewHolder>{
+
+    public interface SelectAttributeListener{
+        void addToSelectedAttributes(AttributesModel attribute);
+        void removeSelectedAttribute(AttributesModel attribute);
+    }
 
 
     private List<AttributesModel> attributes = new ArrayList<>();
     private Context context;
+    private SelectAttributeListener listener;
 
-    public AddEmployeeAttrAdapter(Context context){
+    public SelectedAttributesAdapter(Context context){
         this.context = context;
+        this.listener = (SelectAttributeListener)context;
     }
 
     @NonNull
@@ -38,26 +45,33 @@ public class AddEmployeeAttrAdapter extends RecyclerView.Adapter<AddEmployeeAttr
 
 
         if(attributes.get(position).isClicked()){
-            holder.addAttribute.setImageResource(R.drawable.ic_baseline_done_green);
+            holder.selectAttribute.setImageResource(R.drawable.ic_baseline_done_green);
         } else {
-            holder.addAttribute.setImageResource(R.drawable.ic_baseline_done_24);
+            holder.selectAttribute.setImageResource(R.drawable.ic_baseline_done_24);
         }
 
-        holder.addAttribute.setOnClickListener(new View.OnClickListener() {
+
+        holder.selectAttribute.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 boolean isClicked= !attributes.get(position).isClicked();
                 attributes.get(position).setClicked(isClicked);
 
                 if(isClicked){
-                    holder.addAttribute.setImageResource(R.drawable.ic_baseline_done_green);
-                } else {
-                    holder.addAttribute.setImageResource(R.drawable.ic_baseline_done_24);
-                }
+                    holder.selectAttribute.setImageResource(R.drawable.ic_baseline_done_green);
 
+                    if(listener != null){
+                        listener.addToSelectedAttributes(attributes.get(position));
+                    }
+
+                } else {
+                    holder.selectAttribute.setImageResource(R.drawable.ic_baseline_done_24);
+                    listener.removeSelectedAttribute(attributes.get(position));
+                }
             }
         });
-
     }
 
     @Override
@@ -65,20 +79,20 @@ public class AddEmployeeAttrAdapter extends RecyclerView.Adapter<AddEmployeeAttr
         return attributes.size();
     }
 
-    public void changeAttributes(List<AttributesModel> attributes){
+    public void changeSelectedAttributes(List<AttributesModel> attributes){
         this.attributes = attributes;
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView attributeName;
-        private ImageButton addAttribute;
+        private ImageButton selectAttribute;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             attributeName = itemView.findViewById(R.id.attribute_nameV2);
-            addAttribute = itemView.findViewById(R.id.attribute_deleteV2);
+            selectAttribute = itemView.findViewById(R.id.attribute_deleteV2);
         }
     }
 }

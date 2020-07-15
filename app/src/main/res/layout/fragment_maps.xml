@@ -1,19 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Maps">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="The map Fragment" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Search_employee_header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/search_employee"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_employee_attributes"
+            app:layout_constraintStart_toStartOf="@id/Search_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/Search_employee_header"
+            android:text="@string/attributes_available"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="312dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/Search_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/search_employee_attributes"
+            android:id="@+id/available_attributes_list"
+            tools:listitem="@layout/single_attribute_listv2"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/available_attributes_list"
+            app:layout_constraintStart_toStartOf="@id/Search_employee_header"
+            android:text="@string/search_text"
+            app:icon="@drawable/ic_search"
+            android:id="@+id/search_employees_button"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/employees_available"
+            app:layout_constraintTop_toBottomOf="@id/search_employees_button"
+            app:layout_constraintStart_toStartOf="@id/Search_employee_header"
+            android:id="@+id/results_employees_header"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="312dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/resulted_employees_list"
+            app:layout_constraintStart_toStartOf="@id/Search_employee_header"
+            app:layout_constraintTop_toBottomOf="@id/results_employees_header"
+            tools:listitem="@layout/single_searched_employee_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="60dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

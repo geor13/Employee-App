@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class PageViewModel extends AndroidViewModel {
     private LiveData<List<EmployeesModel>> employeesList;
     private LiveData<List<EmployeeWithAttributes>> employeesWithAttributesList;
     private LiveData<List<EmployeesAndAttributes>> employeesAndAttributes;
+    private MutableLiveData<List<AttributesModel>> selectedAttributes = new MutableLiveData<>();
 
 
     public PageViewModel(@NonNull Application application) {
@@ -30,6 +32,14 @@ public class PageViewModel extends AndroidViewModel {
         employeesList = repository.getEmployeesList();
         employeesWithAttributesList = repository.getEmployeesWithAttributes();
         employeesAndAttributes = repository.getEmployeesAndAttributes();
+    }
+
+    public LiveData<List<AttributesModel>> getSelectedAttributes(){
+        return selectedAttributes;
+    }
+
+    public void setSelectedAttributes(List<AttributesModel> selected){
+        selectedAttributes.setValue(selected);
     }
 
     public LiveData<List<EmployeesAndAttributes>> getEmployeesAndAttributes(){

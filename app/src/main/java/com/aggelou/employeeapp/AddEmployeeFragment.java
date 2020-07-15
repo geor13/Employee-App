@@ -132,6 +132,10 @@ public class AddEmployeeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                for(int i = 0; i < listAttributes.size(); i++){
+                    listAttributes.get(i).setClicked(false);
+                }
+
                 Fragment back = Employees.getEmployeesInstance();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -162,7 +166,9 @@ public class AddEmployeeFragment extends Fragment {
 
                 //GET THE CLICKED ATTRIBUTES AND MAKE CONNECTION ME THE EMPLOYEE !!
                 for(int i = 0; i < listAttributes.size(); i++){
+
                     if(listAttributes.get(i).isClicked()){
+
                         EmployeesAndAttributes join = new EmployeesAndAttributes(employee.getEmployeeID(), listAttributes.get(i).getAttrID());
                         addEmployeeViewModel.insertAttributeToEmployee(join);
 
