@@ -26,6 +26,7 @@ public class Repository {
     private LiveData<List<EmployeeWithAttributes>> employeesWithAttributes;
     private LiveData<List<EmployeesAndAttributes>> employeesAndAttributes;
 
+
     public Repository(Application application){
         //INITIALIZE DATABASE
         ApplicationDatabase database = ApplicationDatabase.getInstance(application);
@@ -41,6 +42,7 @@ public class Repository {
         employeesWithAttributes = employeesAndAttributesDao.getEmployeesWithAttributes();
         employeesAndAttributes = employeesAndAttributesDao.getEmployeesAndAttributes();
     }
+
 
     public void deleteSpecifiedLink(int attributeID, int employeeID){
         new DeleteSpecificLinkAsync(employeesAndAttributesDao).execute(attributeID, employeeID);
@@ -202,5 +204,4 @@ public class Repository {
             return null;
         }
     }
-
 }

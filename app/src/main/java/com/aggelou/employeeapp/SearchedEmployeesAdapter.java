@@ -17,8 +17,20 @@ import database.EmployeesModel;
 
 public class SearchedEmployeesAdapter extends RecyclerView.Adapter<SearchedEmployeesAdapter.ViewHolder> {
 
+    public interface MapListener{
+        void goToMap(List<EmployeesModel> employees);
+    }
+
     private List<EmployeesModel> employees = new ArrayList<>();
     private Context context;
+    private MapListener listener;
+
+    public SearchedEmployeesAdapter(Context context){
+        this.context = context;
+        this.listener = (MapListener)context;
+    }
+
+
 
     @NonNull
     @Override
@@ -32,6 +44,16 @@ public class SearchedEmployeesAdapter extends RecyclerView.Adapter<SearchedEmplo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.employeeSurname.setText(employees.get(position).getEmployeeSurname());
         holder.employeeName.setText(employees.get(position).getEmployeeName());
+
+        holder.employeeMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(listener != null){
+                    listener.goToMap(employees);
+                }
+            }
+        });
     }
 
     @Override

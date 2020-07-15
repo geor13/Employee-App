@@ -38,7 +38,6 @@ public class Maps extends Fragment {
 
     private EmptySearchListener listener;
 
-    private List<EmployeesModel> employeesSearched;
 
     public static Maps getInstanceMaps(){
         return new Maps();
@@ -81,7 +80,7 @@ public class Maps extends Fragment {
         availableAttributes.setAdapter(adapter);
 
         employeesResults.setLayoutManager(new LinearLayoutManager(getActivity()));
-        final SearchedEmployeesAdapter employeeAdapter = new SearchedEmployeesAdapter();
+        final SearchedEmployeesAdapter employeeAdapter = new SearchedEmployeesAdapter(getActivity());
         employeesResults.setAdapter(employeeAdapter);
 
         mapsViewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
@@ -139,7 +138,6 @@ public class Maps extends Fragment {
                     }
                 }
 
-                employeesSearched = finalSearchedEmployees;
                 employeeAdapter.changeEmployeeList(finalSearchedEmployees);
 
             }
