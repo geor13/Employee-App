@@ -20,12 +20,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import jsonModels.Location;
+import jsonModels.RoutesResults;
 
 
-public class MapFragment extends Fragment implements OnMapReadyCallback{
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private PageViewModel mapPageViewModel;
-    private ArrayList<Location> locations;
+//    private ArrayList<Location> locations;
+
+    private GoogleMap theMap;
+    private ArrayList<MarkerOptions> listLocations = new ArrayList<>();
 
 
     public MapFragment() {
@@ -59,27 +63,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         super.onViewCreated(view, savedInstanceState);
 
       // THEY WHERE HERE
+        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map_container);
+        mapFragment.getMapAsync(this);
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map_container);
-        mapFragment.getMapAsync(this);
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        locations = new ArrayList<>();
+//        locations = new ArrayList<>();
         mapPageViewModel = new ViewModelProvider(requireActivity()).get(PageViewModel.class);
 
         mapPageViewModel.getLocationRequest().observe(getViewLifecycleOwner(), new Observer<Location>() {
             @Override
             public void onChanged(Location location) {
-                locations.add(location);
-
+//                locations.add(location);
+                listLocations.add(new MarkerOptions().position(new LatLng(location.getLat(), location.getLng())));
             }
         });
 
@@ -88,25 +94,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
     @Override
     public void onDetach() {
         super.onDetach();
-        locations.clear();
     }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
 
+        theMap = googleMap;
 
-        mapPageViewModel.getLocationRequest().observe(getViewLifecycleOwner(), new Observer<Location>() {
-            @Override
-            public void onChanged(Location location) {
-
-                for(int i = 0; i < locations.size() ; i++){
-                    googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(locations.get(i).getLat(),locations.get(i).getLng()))
-                            .title("Marker"+location.getLat()));;
+                  for(int i = 0; i < listLocations.size() ; i++){
+                    googleMap.addMarker(listLocations.get(i));
                 }
+
+        //MAKE THE REQUEST FOR DIRECTIONS -- MIGHT BREAK !!!!!!!!!
+        if(listLocations != null){
+            mapPageViewModel.setDirectionRequest(listLocations.get(0).getPosition(), listLocations.get(1).getPosition(), getActivity());
+        }
+
+        //RECEIVE THE RESULTED DIRECTIONS
+        mapPageViewModel.getDirections().observe(getViewLifecycleOwner(), new Observer<RoutesResults>() {
+            @Override
+            public void onChanged(RoutesResults routesResults) {
 
             }
         });
     }
 
+    @Override
+    public void onMapClick(LatLng latLng) {
+
+    }
 }

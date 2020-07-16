@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import database.EmployeesAndAttributes;
 import database.EmployeesModel;
 import jsonModels.Location;
 import jsonModels.RequestResults;
+import jsonModels.RoutesResults;
 
 public class PageViewModel extends AndroidViewModel {
 
@@ -36,6 +38,7 @@ public class PageViewModel extends AndroidViewModel {
 
     private MutableLiveData<Location> location = new MutableLiveData<>();
 
+    private MutableLiveData<RoutesResults> resultDirection = new MutableLiveData<>();
 
     public PageViewModel(@NonNull Application application) {
         super(application);
@@ -47,7 +50,13 @@ public class PageViewModel extends AndroidViewModel {
         employeesAndAttributes = repository.getEmployeesAndAttributes();
 
     }
+    public void setDirectionRequest(LatLng start, LatLng end, Context context){
+        makeDirectionRequest(start, end, context);
+    }
 
+    public LiveData<RoutesResults> getDirections(){
+        return resultDirection;
+    }
 
     public void setLocationRequest(String address, Context context){
         makePlaceRequest(address, context);
@@ -116,7 +125,6 @@ public class PageViewModel extends AndroidViewModel {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+address+"&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAL7IRjsN8g4FjVzH8Jj2huM7S7W6XZBtI";
-        List<Location> list;
 // Request a string response from the provided URL.
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -126,6 +134,31 @@ public class PageViewModel extends AndroidViewModel {
 
                         RequestResults result = new Gson().fromJson(response, RequestResults.class);
                         location.setValue(result.getCandidates().get(0).getGeometry().getLocation());  //MAYBE POST
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
+    private void makeDirectionRequest(LatLng start, LatLng end , Context context){
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+start.latitude+","+start.longitude+"&destination="+end.latitude+","+end.longitude+"&key=AIzaSyAL7IRjsN8g4FjVzH8Jj2huM7S7W6XZBtI";
+// Request a string response from the provided URL.
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        RoutesResults result = new Gson().fromJson(response, RoutesResults.class);
+                        resultDirection.setValue(result);//MAYBE POST
                     }
                 }, new Response.ErrorListener() {
             @Override
