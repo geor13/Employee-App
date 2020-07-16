@@ -16,7 +16,14 @@
             android:layout_height="wrap_content"
             android:text="@string/new_employee_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="31dp"
+            android:layout_marginStart="24dp"/>
 
         <EditText
             android:inputType="text"
@@ -25,7 +32,13 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
             app:layout_constraintTop_toBottomOf="@id/edit_employee_header"
-            android:text="@string/new_employee_name"/>
+            android:text="@string/new_employee_name"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="13dp"/>
 
         <TextView
             android:id="@+id/edit_employee_header_surname"
@@ -33,7 +46,13 @@
             android:layout_height="wrap_content"
             android:text="@string/new_employee_surname"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
-            app:layout_constraintTop_toBottomOf="@id/edit_employee_name"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_employee_name"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="40dp"/>
 
         <EditText
             android:inputType="text"
@@ -42,7 +61,13 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
             app:layout_constraintTop_toBottomOf="@id/edit_employee_header_surname"
-            android:text="@string/new_employee_surname"/>
+            android:text="@string/new_employee_surname"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="13dp"/>
 
 
         <TextView
@@ -51,14 +76,27 @@
             android:layout_height="wrap_content"
             android:text="@string/new_employee_date"
             app:layout_constraintTop_toBottomOf="@id/edit_employee_surname"
-            app:layout_constraintStart_toStartOf="@id/edit_employee_header"/>
+            app:layout_constraintStart_toStartOf="@id/edit_employee_header"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="40dp"/>
+
         <TextView
             android:id="@+id/day_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/employee_day"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
-            app:layout_constraintTop_toBottomOf="@id/edit_employee_dob_header"/>
+            app:layout_constraintTop_toBottomOf="@id/edit_employee_dob_header"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="13dp"/>
 
         <NumberPicker
             android:id="@+id/employee_day_edit"
@@ -73,7 +111,13 @@
             android:layout_height="wrap_content"
             android:text="@string/employee_month"
             app:layout_constraintStart_toEndOf="@id/employee_day_edit"
-            app:layout_constraintTop_toBottomOf="@id/edit_employee_dob_header"/>
+            app:layout_constraintBottom_toBottomOf="@id/day_header"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginStart="12dp"/>
 
         <NumberPicker
             android:id="@+id/employee_month_edit"
@@ -88,7 +132,13 @@
             android:layout_height="wrap_content"
             android:text="@string/employee_year"
             app:layout_constraintStart_toEndOf="@id/employee_month_edit"
-            app:layout_constraintTop_toBottomOf="@id/edit_employee_dob_header"/>
+            app:layout_constraintTop_toTopOf="@id/day_header"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginStart="12dp"/>
 
         <NumberPicker
             android:id="@+id/employee_year_edit"
@@ -103,12 +153,19 @@
             android:layout_height="wrap_content"
             android:text="@string/employee_car"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
-            app:layout_constraintTop_toBottomOf="@id/employee_day_edit"/>
+            app:layout_constraintTop_toBottomOf="@id/employee_day_edit"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="40dp"/>
         <CheckBox
             android:id="@+id/has_car_yes_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_checkbox"
+            android:layout_marginTop="13dp"
             app:layout_constraintStart_toStartOf="@id/car_header_edit"
             app:layout_constraintTop_toBottomOf="@id/car_header_edit"/>
         <CheckBox
@@ -125,7 +182,13 @@
             android:layout_height="wrap_content"
             android:text="@string/employee_address"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
-            app:layout_constraintTop_toBottomOf="@id/has_car_yes_edit"/>
+            app:layout_constraintTop_toBottomOf="@id/has_car_yes_edit"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="40dp"/>
 
         <EditText
             android:id="@+id/address_add_edit"
@@ -133,7 +196,13 @@
             android:layout_height="wrap_content"
             android:text="@string/employee_address"
             app:layout_constraintStart_toStartOf="@id/car_header_edit"
-            app:layout_constraintTop_toBottomOf="@id/address_header_edit"/>
+            app:layout_constraintTop_toBottomOf="@id/address_header_edit"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#707070"
+            android:lineSpacingExtra="5sp"
+            android:layout_marginTop="13dp"/>
 
         <TextView
             android:id="@+id/attributes_available_edit"
@@ -141,7 +210,8 @@
             android:layout_height="wrap_content"
             android:text="@string/attributes_available"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
-            app:layout_constraintTop_toBottomOf="@id/address_add_edit"/>
+            app:layout_constraintTop_toBottomOf="@id/address_add_edit"
+            android:layout_marginTop="40dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/attributes_list_employee_has"
@@ -149,7 +219,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/attributes_available_edit"
             app:layout_constraintStart_toStartOf="@id/attributes_available_edit"
-            tools:listitem="@layout/single_attribute_list"/>
+            tools:listitem="@layout/single_attribute_list"
+            android:layout_marginTop="13dp"/>
 
         <TextView
             android:id="@+id/confirm_employee_edit"
@@ -158,8 +229,13 @@
             android:text="@string/create_btn"
             app:layout_constraintStart_toStartOf="@id/edit_employee_header"
             app:layout_constraintTop_toBottomOf="@id/attributes_list_employee_has"
-            android:layout_marginBottom="200dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginBottom="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="#1e3d65"
+            android:lineSpacingExtra="5sp"/>
 
 
 
