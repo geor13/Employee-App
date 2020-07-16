@@ -16,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private GoogleMap theMap;
     private ArrayList<MarkerOptions> listLocations = new ArrayList<>();
+    private ArrayList<LatLng> polylines = new ArrayList<>();
 
 
     public MapFragment() {
@@ -114,6 +116,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mapPageViewModel.getDirections().observe(getViewLifecycleOwner(), new Observer<RoutesResults>() {
             @Override
             public void onChanged(RoutesResults routesResults) {
+
+                for(int i = 0; i < routesResults.getRoutes().get(0).getLegs().get(0).getSteps().size(); i++) {
+
+                   polylines.add(new LatLng(routesResults.getRoutes().get(0).getLegs().get(0).getSteps().get(i).getStart_location().getLat(), routesResults.getRoutes().get(0).getLegs().get(0).getSteps().get(i).getStart_location().getLng()));
+
+                }
+
+                PolylineOptions polylineOptions = new PolylineOptions();
+
+                for (int z = 0; z < polylines.size(); z ++){
+                    googleMap.addPolyline(polylineOptions.add(polylines.get(z)));
+                }
 
             }
         });
